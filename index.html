@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Translation Website</h1>
+    <p>Type a sentence in English to translate into your language:</p>
+    <textarea id="inputText" placeholder="Type here..."></textarea>
+    <button onclick="translate()">Translate</button>
+    <div class="output">
+        <h2>Translation:</h2>
+        <p id="outputText">Your translation will appear here...</p>
+    </div>
+
+    <script>
+        const vocabulary = {
+            "I": "Loc", "you": "Mos", "he": "San", "she": "San", "it": "San",
+            "we": "Co Mos", "they": "San Mos", "you (plural)": "Mos Co", "itself": "San San",
+            "what": "Chus Cha", "who": "Ti Cha", "where": "Co Cha", "when": "So Cha", "why": "Tri Cha", "how": "Op Cha",
+            "in": "Mos", "on": "So Ma", "with": "Co", "for": "Co", "under": "Ma So", "above": "So Loc",
+            "house": "Op So", "tree": "Soc San", "river": "San Po", "mountain": "Tam So", "sun": "Pu Mos",
+            "moon": "Tam Ma", "star": "Pu Soc", "ocean": "So Chus", "cloud": "Chus Ma",
+            "dog": "La So", "cat": "Chus Chi", "bird": "Lee Loc", "fish": "Bo Loc", "horse": "Op So",
+            "lion": "Ti Loc", "snake": "Pu Ma", "head": "Op Cha", "eye": "Loc Cha",
+            "hand": "Op La", "leg": "Ti Po", "heart": "Op San", "ear": "Cha San", "foot": "Bo Tok",
+            "mouth": "Tam So", "nose": "Ma So", "mother": "Tam San", "father": "Bo San",
+            "sister": "Pu Loc", "brother": "Lee San", "child": "Chi Ma", "water": "Co So San",
+            "bread": "Lee San Cha La", "fruit": "Bo San Loc Soc", "meat": "Tam Cha Soc", "rice": "San Loc Cha Cha",
+            "milk": "Tam Loc Ti Tok", "soup": "So So Mos Pu", "sugar": "Pu Mos San Cha San", "salt": "Pu La Soc Soc",
+            "coffee": "Co So Bo Loc Cha", "red": "San Cha", "blue": "Lee Mos", "green": "Po San",
+            "yellow": "Tri Cha", "black": "Chus Ti", "white": "Co Op", "one": "So Ma", "two": "Soc Co",
+            "three": "Soc San", "four": "Bo Ti", "five": "Bo Cha", "six": "Bo Tro", "seven": "Bo Stref",
+            "eight": "Loc Bo", "nine": "Loc Ma", "ten": "Soc Cha", "to be": "Cha", "to work": "Soc",
+            "to love": "Ti San", "to eat": "Cha Soc", "to drink": "La Loc", "to sleep": "Pu Op",
+            "to run": "San Ma", "to walk": "Co Tok", "to jump": "Gee Mos", "to see": "Loc Po",
+            "to hear": "Loc Op", "to speak": "Pu San", "to have": "Ma Cha", "to go": "Tam Soc",
+            "to think": "Tam Loc", "to do": "Loc Soc", "and": "So", "but": "Ma", "or": "Chus",
+            "big": "Bo Po", "small": "Chus Ti", "fast": "San Soc", "slow": "San Co",
+            "happy": "Op Tri", "sad": "Pu La", "bright": "Pu Tok", "dark": "Chus Tok",
+            "strong": "San Po", "weak": "Chus La"
+        };
+
+        const alphabet = {
+            "a": "chi", "b": "lee", "c": "chus", "d": "la", "e": "cha", "f": "bo",
+            "g": "po", "h": "op", "i": "loc", "j": "gee", "k": "tok", "l": "ti",
+            "m": "tam", "n": "ma", "o": "so", "p": "lom", "q": "tom", "r": "san",
+            "s": "pu", "t": "soc", "u": "mos", "v": "stref", "w": "co", "x": "tro",
+            "y": "tri", "z": "zam"
+        };
+
+        function translate() {
+            const inputText = document.getElementById("inputText").value.toLowerCase();
+            const words = inputText.split(/\s+/);
+            const translatedWords = words.map(word => {
+                if (vocabulary[word]) {
+                    return vocabulary[word];
+                } else {
+                    return [...word].map(letter => alphabet[letter] || letter).join(" ");
+                }
+            });
+            document.getElementById("outputText").innerText = translatedWords.join(" ");
+        }
+    </script>
+</body>
+</html>
